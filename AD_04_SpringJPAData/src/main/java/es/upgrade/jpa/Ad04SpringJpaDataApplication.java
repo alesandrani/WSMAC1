@@ -1,5 +1,6 @@
 package es.upgrade.jpa;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.boot.SpringApplication;
@@ -23,11 +24,21 @@ public class Ad04SpringJpaDataApplication {
 		 m.setTipo("planta");
 		 mDao.save(m);
 		 
+		 m = new Munion();
+		 m.setNombre("Pikachu");
+		 m.setPuntosVida(20);
+		 m.setTipo("electrico");
+		 mDao.save(m);
+		 
 		Optional <Munion> optional = mDao.findById(1);
 		if(optional.isPresent()) {
 			Munion m2 = optional.get();//con get desenvolvemos el objeto real
-			System.out.println(m2);
+			System.out.println("primer" + m2);
 		}
+		m = mDao.findByNombreContains("Pika");
+		System.out.println("segundo" + m);
+		List<Munion> lista = mDao.findByPuntosVida(20);
+		System.out.println(lista);
 	}
 
 }
